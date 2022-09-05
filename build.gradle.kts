@@ -8,7 +8,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "1.0.6"
 }
 
-group = "org.soappowered"
+group = "de.airblocks"
 version = "1.0.0"
 
 repositories {
