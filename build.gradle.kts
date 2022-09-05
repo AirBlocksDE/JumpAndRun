@@ -8,7 +8,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "1.0.6"
 }
 
-group = "org.example"
+group = "org.soappowered"
 version = "1.0.0"
 
 repositories {
@@ -42,12 +42,12 @@ tasks {
 }
 
 bukkit {
-    name = "ExamplePlugin"
+    name = "JumpAndRun"
     apiVersion = "1.19"
     authors = listOf(
-        "Your Name",
+        "dino",
     )
-    main = "$group.exampleplugin.ExamplePlugin"
+    main = "$group.jumpandrun.JumpAndRun"
     version = getVersion().toString()
     libraries = listOf(
         "net.axay:kspigot:$kspigotVersion",
