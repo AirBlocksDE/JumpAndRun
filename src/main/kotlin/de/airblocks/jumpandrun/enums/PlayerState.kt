@@ -1,5 +1,6 @@
 package de.airblocks.jumpandrun.enums
 
+import de.airblocks.jumpandrun.manager.PlayerManager
 import org.bukkit.entity.Player
 
 enum class PlayerState(name: String) {
@@ -7,6 +8,6 @@ enum class PlayerState(name: String) {
     JUMPING("Jumping"),
     BUILDING("Building");
 }
-fun Player.getState(): PlayerState {
-    return PlayerState.JUMPING
+fun Player.getState(): PlayerState? {
+    return PlayerManager.playerStates[player]
 }
