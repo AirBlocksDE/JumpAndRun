@@ -1,5 +1,6 @@
 package de.airblocks.jumpandrun
 
+import de.airblocks.jumpandrun.listener.FoodLevelChangeListener
 import de.airblocks.jumpandrun.listener.PlayerInteractListener
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.main.KSpigot
@@ -10,7 +11,6 @@ import net.axay.kspigot.extensions.onlinePlayers
 import net.axay.kspigot.extensions.worlds
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
-import org.bukkit.WorldCreator
 import org.bukkit.generator.ChunkGenerator
 import java.io.File
 
@@ -23,6 +23,7 @@ class JumpAndRun : KSpigot() {
         PlayerJoinListener
         PlayerQuitListener
         PlayerInteractListener
+        FoodLevelChangeListener
 
         //WorldCreator("test").generator(VoidGenerator()).createWorld()
 
