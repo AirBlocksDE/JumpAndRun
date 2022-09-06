@@ -1,6 +1,7 @@
 package de.airblocks.jumpandrun.manager
 
 import de.airblocks.jumpandrun.utils.VoidGenerator
+import kotlinx.serialization.Serializable
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.extensions.onlinePlayers
 import net.kyori.adventure.text.Component
@@ -10,6 +11,11 @@ import java.io.File
 
 object MapManager {
 
+    init {
+        File("plugins/JumpAndRun/maps").mkdirs()
+    }
+
+    @Serializable
     data class Map(val name: String, val folderName: String) {
 
         fun exists(): Boolean {

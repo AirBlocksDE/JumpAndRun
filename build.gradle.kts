@@ -1,3 +1,4 @@
+
 val javaVersion = 17
 val kspigotVersion = "1.19.0"
 
@@ -6,6 +7,7 @@ plugins {
     id("io.papermc.paperweight.userdev") version "1.3.8"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.2"
     id("xyz.jpenilla.run-paper") version "1.0.6"
+    kotlin("plugin.serialization") version "1.7.10"
 }
 
 group = "de.airblocks"
@@ -21,6 +23,8 @@ dependencies {
 
     // KSpigot dependency
     implementation("net.axay", "kspigot", kspigotVersion)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 }
 
 tasks {
@@ -49,7 +53,11 @@ bukkit {
     )
     main = "$group.jumpandrun.JumpAndRun"
     version = getVersion().toString()
+    commands {
+        register("jumpandrun")
+    }
     libraries = listOf(
         "net.axay:kspigot:$kspigotVersion",
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0",
     )
 }
