@@ -8,15 +8,14 @@ import de.airblocks.jumpandrun.listener.PlayerJoinListener
 import de.airblocks.jumpandrun.listener.PlayerQuitListener
 import de.airblocks.jumpandrun.utils.VoidGenerator
 import net.axay.kspigot.extensions.onlinePlayers
-import net.axay.kspigot.extensions.worlds
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.generator.ChunkGenerator
-import java.io.File
 
 class JumpAndRun : KSpigot() {
 
     override fun load() {
+        Bukkit.getConsoleSender().sendMessage(Component.text("Starting ").color(KColors.RED).append(Component.text("${this::class.java.name}").color(KColors.LIGHTGRAY)))
     }
 
     override fun startup() {
@@ -33,12 +32,14 @@ class JumpAndRun : KSpigot() {
             for (player in onlinePlayers) {
                 player.kick(Component.text("Das Plugin wurde gestoppt!").color(KColors.RED))
         }
-        for (target in worlds) {
+        /*for (target in worlds) {
             if (target.name != worlds.get(0).name || target.name != worlds.get(1).name || target.name != worlds.get(2).name) {
                 Bukkit.unloadWorld(target, false)
             println(File(target.name).deleteRecursively())
             }
         }
+
+         */
     }
 
     //code by https://github.com/mooziii
