@@ -1,17 +1,16 @@
-package de.dinomarlir.ffa.command.impl
+package de.airblocks.jumpandrun.command.impl
 
-import de.dinomarlir.ffa.command.AbstractSubCommand
+import de.airblocks.jumpandrun.command.AbstractSubCommand
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.chat.literalText
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import java.net.URL
 
 class InfoCommand : AbstractSubCommand() {
     override val description = "Shows the plugin info"
-    override val permission = "none"
+    override val permission = "null"
 
     override fun handle(sender: CommandSender, mainCommand: Command, args: Array<out String>): Boolean {
         sender.sendMessage(Component.text("Open source plugin").color(KColors.INDIANRED))

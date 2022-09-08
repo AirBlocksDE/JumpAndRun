@@ -1,4 +1,4 @@
-package de.dinomarlir.ffa.command
+package de.airblocks.jumpandrun.command
 
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.chat.literalText
@@ -12,18 +12,21 @@ import org.bukkit.command.TabCompleter
 
 class CommandRegistry : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
+
         if(args!!.isNotEmpty()) {
             if (CommandManager.commands.containsKey(args[0])) {
                 CommandManager.commands.keys.forEach {
                     if (it == args[0]) {
-                        if (CommandManager.commands.get(it)!!.permission == "none") {
+                        if (CommandManager.commands.get(it)!!.permission == null) {
                             CommandManager.commands.get(it)?.handle(sender, command, args)
                             return true
                         }
-                        if (sender.hasPermission(CommandManager.commands.get(it)!!.permission)) {
+                        if (sender.hasPermission(CommandManager.commands[it]!!.permission!!)) {
                             CommandManager.commands.get(it)?.handle(sender, command, args)
                             return true
                         }
+                        sender.sendMessage(Component.text("Dafür hast du keine Rechte!").color(KColors.RED))
+                        return true
                     }
                 }
             }
@@ -38,18 +41,44 @@ class CommandRegistry : CommandExecutor, TabCompleter {
         })
         sender.sendMessage(literalText {
             CommandManager.commands.forEach {
-                sender.sendMessage(literalText {
-                    text("  " + it.key) { color = KColors.CORNFLOWERBLUE }
-                    text(" | ") { color = KColors.DARKGRAY }
-                    text(it.value.description) { color = KColors.GREENYELLOW}
-                    clickEvent = ClickEvent.clickEvent(
-                        ClickEvent.Action.SUGGEST_COMMAND, "/jumpandrun ${it.key}")
-                })
+                if (it.value.permission == null) {
+                    sender.sendMessage(literalText {
+                        text("  " + it.key) { color = KColors.CORNFLOWERBLUE }
+                        text(" | ") { color = KColors.DARKGRAY }
+                        text(it.value.description) { color = KColors.GREENYELLOW}
+                        clickEvent = ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/jumpandrun ${it.key}")
+                    })
+                } else if (sender.hasPermission(it.value.permission.toString())) {
+                    sender.sendMessage(literalText {
+                        text("  " + it.key) { color = KColors.CORNFLOWERBLUE }
+                        text(" | ") { color = KColors.DARKGRAY }
+                        text(it.value.description) { color = KColors.GREENYELLOW}
+                        clickEvent = ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/jumpandrun ${it.key}")
+                    })
+                } else {
+                    sender.sendMessage(literalText {
+                        strikethrough = true
+                        text("  ") {
+                            color = KColors.CORNFLOWERBLUE
+                            strikethrough = false
+                        }
+                        text(it.key) {
+                            color = KColors.CORNFLOWERBLUE
+                        }
+                        text(" | ") {
+                            color = KColors.DARKGRAY
+                        }
+                        text(it.value.description) {
+                            color = KColors.GREENYELLOW
+                        }
+                        hoverEvent = HoverEvent.showText(Component.text("Dafür hast du keine Rechte!").color(KColors.RED))
+                    })
+                }
                 sender.sendMessage(literalText("All messages are tab-completeable!") {
                     color = KColors.INDIANRED
                     italic = true
                     hoverEvent = HoverEvent.hoverEvent(
-                    HoverEvent.Action.SHOW_TEXT, Component.text("this is nice!").color(KColors.LIMEGREEN)) })
+                        HoverEvent.Action.SHOW_TEXT, Component.text("this is nice!").color(KColors.LIMEGREEN)) })
             }
         })
         return true

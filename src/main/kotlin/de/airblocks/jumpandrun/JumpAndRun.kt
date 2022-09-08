@@ -1,5 +1,6 @@
 package de.airblocks.jumpandrun
 
+import de.airblocks.jumpandrun.command.CommandRegistry
 import de.airblocks.jumpandrun.listener.FoodLevelChangeListener
 import de.airblocks.jumpandrun.listener.PlayerInteractListener
 import net.axay.kspigot.chat.KColors
@@ -8,7 +9,6 @@ import de.airblocks.jumpandrun.listener.PlayerJoinListener
 import de.airblocks.jumpandrun.listener.PlayerQuitListener
 import de.airblocks.jumpandrun.manager.MapManager
 import de.airblocks.jumpandrun.utils.VoidGenerator
-import de.dinomarlir.ffa.command.CommandRegistry
 import net.axay.kspigot.extensions.onlinePlayers
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -17,7 +17,7 @@ import org.bukkit.generator.ChunkGenerator
 class JumpAndRun : KSpigot() {
 
     override fun load() {
-        Bukkit.getConsoleSender().sendMessage(Component.text("Starting ").color(KColors.RED).append(Component.text("${this::class.java.name}").color(KColors.LIGHTGRAY)))
+        Bukkit.getConsoleSender().sendMessage(Component.text("Starting ").color(KColors.RED).append(Component.text("${this.javaClass.name}").color(KColors.LIGHTGRAY)))
     }
 
     override fun startup() {

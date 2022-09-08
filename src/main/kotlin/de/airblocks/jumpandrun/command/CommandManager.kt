@@ -1,6 +1,6 @@
-package de.dinomarlir.ffa.command
+package de.airblocks.jumpandrun.command
 
-import de.dinomarlir.ffa.command.impl.InfoCommand
+import de.airblocks.jumpandrun.command.impl.InfoCommand
 
 object CommandManager {
     var commands = HashMap<String, AbstractSubCommand>()
