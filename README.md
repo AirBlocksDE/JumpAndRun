@@ -1,2 +1,2 @@
 # JumpAndRun
-the JumpAndRun plugin for the SoapPowered server
+the JumpAndRun plugin for the AirBlocks server
