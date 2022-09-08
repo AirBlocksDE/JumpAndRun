@@ -10,7 +10,8 @@ import org.bukkit.WorldCreator
 import java.io.File
 
 object MapManager {
-
+    //ONLY FOR TEST PURPOSES!
+    val maps = listOf<MapManager.Map>(Map("TestMap", "plugins/JumpAndRun/maps/TestMap"), Map("NiceMap", "plugins/JumpAndRun/maps/NiceMap"))
     init {
         File("plugins/JumpAndRun/maps").mkdirs()
     }

@@ -11,8 +11,7 @@ import org.bukkit.Material
 
 object CreateJarGUI {
     val gui = kSpigotGUI(GUIType.THREE_BY_NINE) {
-        defaultPage = 0
-        page(0) {
+        page(1) {
             title = Component.text("JumpAndRun GUI").color(KColors.GREENYELLOW)
             placeholder(Slots.Border, itemStack(Material.BLACK_STAINED_GLASS_PANE) {
                 meta {

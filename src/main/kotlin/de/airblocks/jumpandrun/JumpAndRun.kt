@@ -25,7 +25,7 @@ class JumpAndRun : KSpigot() {
         PlayerQuitListener
         PlayerInteractListener
         FoodLevelChangeListener
-
+        val int = 3 / 9
         MapManager
 
         getCommand("jumpandrun")?.setExecutor(CommandRegistry())

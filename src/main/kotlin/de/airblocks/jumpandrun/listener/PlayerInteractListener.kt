@@ -3,6 +3,7 @@ package de.airblocks.jumpandrun.listener
 import de.airblocks.jumpandrun.enums.PlayerState
 import de.airblocks.jumpandrun.enums.getState
 import de.airblocks.jumpandrun.gui.CreateJarGUI
+import de.airblocks.jumpandrun.gui.JoinJarGUI
 import net.axay.kspigot.event.listen
 import net.axay.kspigot.gui.openGUI
 import org.bukkit.Material
@@ -20,6 +21,8 @@ object PlayerInteractListener {
                     if (it.action == Action.RIGHT_CLICK_AIR || it.action == Action.RIGHT_CLICK_BLOCK) {
                         if (it.item?.type == Material.BLAZE_ROD) { //TODO: with object
                             player.openGUI(CreateJarGUI.gui)
+                        } else if (it.item?.type == Material.RECOVERY_COMPASS) {
+                            player.openGUI(JoinJarGUI.gui)
                         }
                     }
                 }

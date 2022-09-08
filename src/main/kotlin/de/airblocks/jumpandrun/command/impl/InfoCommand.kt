@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender
 
 class InfoCommand : AbstractSubCommand() {
     override val description = "Shows the plugin info"
-    override val permission = "null"
+    override val permission = null
 
     override fun handle(sender: CommandSender, mainCommand: Command, args: Array<out String>): Boolean {
         sender.sendMessage(Component.text("Open source plugin").color(KColors.INDIANRED))
@@ -18,7 +18,6 @@ class InfoCommand : AbstractSubCommand() {
             color = KColors.LIGHTSLATEGRAY
             italic = true
             clickEvent = ClickEvent.clickEvent(ClickEvent.Action.OPEN_URL, "https://GitHub.com/DinoMarlir/JumpAndRun")
-
         })
         return true
     }
