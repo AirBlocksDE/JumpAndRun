@@ -11,4 +11,4 @@ JumpAndRun plugin for the AirBlocks minecraft server
 - [ ] Better command manager
 - [ ] Better Inventory Manager
 - [ ] GUI's
-- [ ] (Player can create JumpAndRuns)
+- [ ] (Players can create JumpAndRuns)
