@@ -1,5 +1,6 @@
 # JumpAndRun
 the JumpAndRun plugin for the AirBlocks server
+
 ##TODO
 - Scoreboard
 - Build Mode
