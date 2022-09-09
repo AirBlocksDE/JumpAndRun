@@ -1,10 +1,13 @@
 package de.airblocks.jumpandrun.data
 
+import de.airblocks.jumpandrun.manager.MapManager
 import de.airblocks.jumpandrun.utils.VoidGenerator
+import io.papermc.paper.annotation.DoNotUse
 import kotlinx.serialization.Serializable
 import net.axay.kspigot.chat.KColors
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.Warning
 import org.bukkit.WorldCreator
 import java.io.File
 
@@ -56,15 +59,17 @@ data class JarMap(val name: String, val useable: Boolean) {
         }
     }
 
-    fun deleteWorld() { //tested: works -> todos
+    fun deleteMap() { //tested: works -> todos
         val world = Bukkit.getWorld(name)
         val mapFolder = File("plugins/JumpAndRun/maps/$name")
 
         unloadWorld(false)
         mapFolder.deleteRecursively()
         //TODO: remove from world (Hash)Map -> coming soon
+        MapManager.maps.remove(this)
     }
 
+    @DoNotUse //because it won't work
     fun loadInBuildMode() {
         loadWorld()
         //TODO: MapState implementation
@@ -87,5 +92,6 @@ data class JarMap(val name: String, val useable: Boolean) {
         worldFolder.copyRecursively(mapFolder)
         mapConfigFile.createNewFile()
         worldFolder.deleteRecursively()
+        MapManager.maps.add(this)
     }
 }

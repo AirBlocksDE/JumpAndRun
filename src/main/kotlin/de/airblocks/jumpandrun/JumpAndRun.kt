@@ -24,6 +24,8 @@ class JumpAndRun : KSpigot() {
         PlayerQuitListener
         PlayerInteractListener
         FoodLevelChangeListener
+        PlayerChangedWorldListener
+
         MapManager
 
         getCommand("jumpandrun")?.setExecutor(CommandRegistry())

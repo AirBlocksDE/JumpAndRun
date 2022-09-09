@@ -4,7 +4,6 @@ import de.airblocks.jumpandrun.data.JarMap
 import java.io.File
 
 object MapManager {
-    //ONLY FOR TEST PURPOSES!
     var maps: ArrayList<JarMap> = ArrayList<JarMap>()
 
     init {

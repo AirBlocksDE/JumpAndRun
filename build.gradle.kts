@@ -54,7 +54,9 @@ bukkit {
     main = "$group.jumpandrun.JumpAndRun"
     version = getVersion().toString()
     commands {
-        register("jumpandrun")
+        register("jumpandrun") {
+            aliases = listOf("jar")
+        }
     }
     libraries = listOf(
         "net.axay:kspigot:$kspigotVersion",

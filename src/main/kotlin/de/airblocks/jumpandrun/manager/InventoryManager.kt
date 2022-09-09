@@ -54,6 +54,16 @@ object InventoryManager {
                     }
                 })
             }
+        } else if (this.getState() == PlayerState.BUILDING) {
+            with(this.inventory) {
+                clear()
+
+                setItem(8, itemStack(Material.SPECTRAL_ARROW) {
+                    meta {
+                        displayName(Component.text("JumpAndRun verlassen").color(KColors.RED))
+                    }
+                })
+            }
         }
     }
 }

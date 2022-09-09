@@ -74,12 +74,12 @@ class CommandRegistry : CommandExecutor, TabCompleter {
                         hoverEvent = HoverEvent.showText(Component.text("Dafür hast du keine Rechte!").color(KColors.RED))
                     })
                 }
-                sender.sendMessage(literalText("All messages are tab-completeable!") {
-                    color = KColors.INDIANRED
-                    italic = true
-                    hoverEvent = HoverEvent.hoverEvent(
-                        HoverEvent.Action.SHOW_TEXT, Component.text("this is nice!").color(KColors.LIMEGREEN)) })
             }
+            sender.sendMessage(literalText("All messages are tab-completeable!") {
+                color = KColors.INDIANRED
+                italic = true
+                hoverEvent = HoverEvent.hoverEvent(
+                    HoverEvent.Action.SHOW_TEXT, Component.text("this is nice!").color(KColors.LIMEGREEN)) })
         })
         return true
     }
