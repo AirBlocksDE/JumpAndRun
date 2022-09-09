@@ -6,6 +6,4 @@ import kotlinx.serialization.json.Json
 
 val scope = CoroutineScope(Dispatchers.IO)
 
-val json = Json {
-
-}
+val json = Json

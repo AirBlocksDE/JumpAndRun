@@ -6,6 +6,8 @@ import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.main.KSpigot
 import de.airblocks.jumpandrun.manager.MapManager
 import de.airblocks.jumpandrun.utils.VoidGenerator
+import de.airblocks.jumpandrun.utils.json
+import kotlinx.serialization.encodeToString
 import net.axay.kspigot.extensions.onlinePlayers
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -22,26 +24,16 @@ class JumpAndRun : KSpigot() {
         PlayerQuitListener
         PlayerInteractListener
         FoodLevelChangeListener
-
         MapManager
 
         getCommand("jumpandrun")?.setExecutor(CommandRegistry())
-        getCommand("jumpandrun")?.setTabCompleter(CommandRegistry())
-        //WorldCreator("test").generator(VoidGenerator()).createWorld()
+        getCommand("jumpandrun")?.tabCompleter = CommandRegistry()
     }
 
     override fun shutdown() {
             for (player in onlinePlayers) {
                 player.kick(Component.text("Das Plugin wurde gestoppt!").color(KColors.RED))
         }
-        /*for (target in worlds) {
-            if (target.name != worlds.get(0).name || target.name != worlds.get(1).name || target.name != worlds.get(2).name) {
-                Bukkit.unloadWorld(target, false)
-            println(File(target.name).deleteRecursively())
-            }
-        }
-
-         */
     }
 
     //code by https://github.com/mooziii

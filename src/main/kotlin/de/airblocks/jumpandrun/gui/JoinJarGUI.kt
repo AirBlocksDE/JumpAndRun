@@ -1,5 +1,6 @@
 package de.airblocks.jumpandrun.gui
 
+import de.airblocks.jumpandrun.data.JarMap
 import de.airblocks.jumpandrun.manager.MapManager
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.gui.*
@@ -7,7 +8,11 @@ import net.axay.kspigot.items.itemStack
 import net.axay.kspigot.items.meta
 import net.axay.kspigot.items.name
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.OfflinePlayer
+import org.bukkit.inventory.meta.SkullMeta
+import java.util.*
 
 object JoinJarGUI {
     val gui = kSpigotGUI(GUIType.FIVE_BY_NINE) {
@@ -30,11 +35,14 @@ object JoinJarGUI {
                     displayName(Component.text("Nächste Seite").color(KColors.BLUE))
                 }
             }, null) {}
-            val compund = createRectCompound<MapManager.Map>(Slots.RowFourSlotTwo, Slots.RowFourSlotEight, iconGenerator = {
-                itemStack(Material.STONE) {
+            val compund = createRectCompound<JarMap>(Slots.RowFourSlotTwo, Slots.RowFourSlotEight, iconGenerator = {
+                val uuids = listOf<UUID>(UUID.fromString("ed21d90f-5bf7-4ae0-a3ea-75c519c89a50"), UUID.fromString("72ccbc0c-a35f-4492-9450-971a26607ee0"), UUID.randomUUID())
+                itemStack(Material.PLAYER_HEAD) {
                     meta {
-                        name = Component.text(it.name).color(KColors.MEDIUMVIOLETRED)
-                        lore(listOf(Component.text(it.folderName).color(KColors.BLUE)))
+                        name = Component.text(it.name).color(KColors.allColors().random())
+                    }
+                    meta<SkullMeta> {
+                        owningPlayer = Bukkit.getOfflinePlayer(uuids.random())
                     }
                 }
             }, onClick = { _, _ ->
