@@ -6,6 +6,8 @@ import org.bukkit.event.player.PlayerJoinEvent
 import de.airblocks.jumpandrun.manager.InventoryManager.setItems
 import de.airblocks.jumpandrun.manager.PlayerManager
 import de.airblocks.jumpandrun.manager.PlayerManager.update
+import org.bukkit.Bukkit
+import org.bukkit.Location
 
 object PlayerJoinListener {
 
@@ -16,6 +18,14 @@ object PlayerJoinListener {
 
             PlayerManager.playerStates[player] = PlayerState.LOBBY
             player.update()
+            player.teleport(
+                Location(
+                Bukkit.getWorld("world"),
+                1.0,
+                Bukkit.getWorld("world")?.getHighestBlockAt(1, 1)?.y!!.toDouble() + 1,
+                1.0
+                )
+            )
         }
     }
 }

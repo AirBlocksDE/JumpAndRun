@@ -11,61 +11,64 @@ import java.io.File
 
 object MapManager {
     //ONLY FOR TEST PURPOSES!
-    val maps = listOf<MapManager.Map>(Map("TestMap", "plugins/JumpAndRun/maps/TestMap"), Map("NiceMap", "plugins/JumpAndRun/maps/NiceMap"))
+    val maps = listOf<MapManager.Map>(Map("TestMap"), Map("NiceMap"))
+
     init {
         File("plugins/JumpAndRun/maps").mkdirs()
     }
 
     @Serializable
-    data class Map(val name: String, val folderName: String) {
+    data class Map(val name: String) {
 
-        fun exists(): Boolean {
-            val mapConfigFile = File("plugins/JumpAndRun/maps/$name/map.json")
+        fun exists(): Boolean { //tested: works
+            val mapConfigFile = File("plugins/JumpAndRun/maps/$name")
 
             return mapConfigFile.exists()
         }
 
-        fun isLoaded(): Boolean {
+        fun isLoaded(): Boolean { //tested: works
             if (Bukkit.getWorld(name) != null) return true
             return false
         }
 
-        fun loadWorld() {
+        fun loadWorld() { //tested: works
             val mapFolder = File("plugins/JumpAndRun/maps/$name")
             val mapConfigFile = File("${mapFolder.path}/map.json")
 
-            if (!mapConfigFile.exists()) {
+            if (!mapFolder.exists()) {
                 Bukkit.getConsoleSender().sendMessage(Component.text("Die Welt $name scheint nicht zu existieren!").color(KColors.RED))
                 return
             }
+
             if (File(name).exists()) {
                 Bukkit.getConsoleSender().sendMessage(Component.text("Die Welt $name ist bereits geladen!").color(KColors.RED))
                 return
             }
             val direction = File(name)
-            if (!direction.exists()) direction.mkdir()
+
             mapFolder.copyTo(direction, false)
             WorldCreator(name).generator(VoidGenerator()).createWorld()
         }
 
-        fun unloadWorld(save: Boolean) {
+        fun unloadWorld(save: Boolean) { //TODO: save
             val mapFolder = File("plugins/JumpAndRun/maps/$name")
+            val worldFolder = File(name)
 
+            Bukkit.getWorld(name)?.players?.forEach {
+                it.kick(Component.text("Die Welt in der du warst wurde gelöscht! Bitte verbinde dich erneut.").color(KColors.RED))
+            }
             if (Bukkit.getWorld(name) != null) {
                 Bukkit.unloadWorld(Bukkit.getWorld(name)!!, save)
-                mapFolder.delete()
+                worldFolder.deleteRecursively()
             }
         }
 
-        fun deleteWorld() {
-            for (target in onlinePlayers) {
-                if (target.world.name == name) {
-                    target.kick(Component.text("Die Welt in der du warst wurde gelöscht! Bitte verbinde dich erneut.").color(KColors.RED))
-                }
-            }
-            if (Bukkit.getWorld(name) != null) Bukkit.unloadWorld(Bukkit.getWorld(name)!!, false)
+        fun deleteWorld() { //tested: works -> todos
+            val world = Bukkit.getWorld(name)
             val mapFolder = File("plugins/JumpAndRun/maps/$name")
-            mapFolder.delete()
+
+            unloadWorld(false)
+            mapFolder.deleteRecursively()
             //TODO: remove from world (Hash)Map -> coming soon
         }
 
@@ -75,20 +78,21 @@ object MapManager {
         }
 
 
-        fun createMap() {
+        fun createMap() { //tested: works
             val mapFolder = File("plugins/JumpAndRun/maps/$name")
             val mapConfigFile = File("${mapFolder.path}/map.json")
-
-            if (mapFolder.exists()) return
-            if (File(name).exists()) return
-
-            mapFolder.mkdirs()
-            WorldCreator(name).generator(VoidGenerator()).createWorld()
-            Bukkit.getWorld(name)?.save()
-            Bukkit.unloadWorld(Bukkit.getWorld(name)!!, true)
-
             val worldFolder = File(name)
-            worldFolder.copyTo(mapFolder)
+
+            if (mapFolder.exists()) {
+                Bukkit.getConsoleSender().sendMessage(Component.text("Die Welt $name existiert bereits!").color(KColors.RED))
+                return
+            }
+            if (worldFolder.exists()) worldFolder.deleteRecursively()
+
+            WorldCreator(name).generator(VoidGenerator()).createWorld()
+            Bukkit.unloadWorld(Bukkit.getWorld(name)!!, true)
+            worldFolder.copyRecursively(mapFolder)
+            worldFolder.deleteRecursively()
         }
     }
 }

@@ -1,12 +1,9 @@
 package de.airblocks.jumpandrun
 
 import de.airblocks.jumpandrun.command.CommandRegistry
-import de.airblocks.jumpandrun.listener.FoodLevelChangeListener
-import de.airblocks.jumpandrun.listener.PlayerInteractListener
+import de.airblocks.jumpandrun.listener.*
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.main.KSpigot
-import de.airblocks.jumpandrun.listener.PlayerJoinListener
-import de.airblocks.jumpandrun.listener.PlayerQuitListener
 import de.airblocks.jumpandrun.manager.MapManager
 import de.airblocks.jumpandrun.utils.VoidGenerator
 import net.axay.kspigot.extensions.onlinePlayers
@@ -25,13 +22,12 @@ class JumpAndRun : KSpigot() {
         PlayerQuitListener
         PlayerInteractListener
         FoodLevelChangeListener
-        val int = 3 / 9
+
         MapManager
 
         getCommand("jumpandrun")?.setExecutor(CommandRegistry())
         getCommand("jumpandrun")?.setTabCompleter(CommandRegistry())
         //WorldCreator("test").generator(VoidGenerator()).createWorld()
-
     }
 
     override fun shutdown() {
