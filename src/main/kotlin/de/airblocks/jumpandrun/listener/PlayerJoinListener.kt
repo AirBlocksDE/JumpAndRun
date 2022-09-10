@@ -5,6 +5,7 @@ import net.axay.kspigot.event.listen
 import org.bukkit.event.player.PlayerJoinEvent
 import de.airblocks.jumpandrun.manager.PlayerManager
 import de.airblocks.jumpandrun.manager.PlayerManager.update
+import de.airblocks.jumpandrun.manager.initScoreboard
 import org.bukkit.Bukkit
 import org.bukkit.Location
 
@@ -24,6 +25,7 @@ object PlayerJoinListener {
                 1.0
                 )
             )
+            player.initScoreboard()
         }
     }
 }

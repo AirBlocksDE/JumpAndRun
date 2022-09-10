@@ -5,9 +5,8 @@ import de.airblocks.jumpandrun.listener.*
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.main.KSpigot
 import de.airblocks.jumpandrun.manager.MapManager
+import de.airblocks.jumpandrun.manager.ScoreboardManager
 import de.airblocks.jumpandrun.utils.VoidGenerator
-import de.airblocks.jumpandrun.utils.json
-import kotlinx.serialization.encodeToString
 import net.axay.kspigot.extensions.onlinePlayers
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -27,6 +26,7 @@ class JumpAndRun : KSpigot() {
         PlayerChangedWorldListener
 
         MapManager
+        ScoreboardManager
 
         getCommand("jumpandrun")?.setExecutor(CommandRegistry())
         getCommand("jumpandrun")?.tabCompleter = CommandRegistry()
