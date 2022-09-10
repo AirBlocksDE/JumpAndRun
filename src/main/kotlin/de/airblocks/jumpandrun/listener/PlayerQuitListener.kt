@@ -15,7 +15,7 @@ object PlayerQuitListener {
             PlayerManager.playerStates.remove(player)
 
             player.mainScoreboard?.players!!.remove(player)
-            ScoreboardManager.scoreboards.remove(player)
+            if (ScoreboardManager.scoreboards.containsKey(player)) ScoreboardManager.scoreboards.remove(player)
         }
     }
 }
